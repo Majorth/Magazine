@@ -26,7 +26,14 @@
     grid-template-columns: minmax(2rem,1fr) minmax(min-content, 94rem) minmax(2rem,1fr);
     row-gap:3rem;
   }/*this is your parent element for your grid layout*/
-  /*the minmax makes your columns responsive on any device; first argument is min value*/
+  img{
+    width:100%;
+    object-fit:cover;
+  }/*object fit positions the element within its container; cover=fill container, cropping as needed without changing aspect ratio*/
+  hr {
+    margin: 1.5rem 0;
+    border:1px solid rgba(120,120,120,0.6);
+  }
   .heading{
     grid-column:2/3;
     display: grid;
@@ -38,16 +45,15 @@
     font-size: 1.8rem;
     letter-spacing: 0.6px;
     column-width: 25rem;
+    text-align:justify;
   }/*this is element is not a grid but using column width will create columns.*/
+  /*justify spaces the words horizontally but dosen't make block paragraphs, making the text easier to read.*/
   .hero{
     grid-column: 1/-1;
     position: relative;
   }/*-1 is the default end column (when you don't know how many) so the element will span the width.*/
   /*it's now 1 in its new position, not 2.*/
-  img{
-    width:100%;
-    object-fit:cover;
-  }/*object fit positions the element within its container; cover=fill container, cropping as needed without changing aspect ratio*/
+ 
 
 .hero-title{
     text-align:center;
@@ -80,3 +86,79 @@
   }/*if you want to add social media icon use auto flow; uses column/row as first value and auto places the next value*/
   /*to match your current columns/row, override with grid auto column and select the same as the template earlier in the box*/
   /*align-items along the column axis in grid while justify items along the row axis.*/
+  .first-paragraph::first-letter{
+    font-size:6rem;
+    color: orangered;
+    float: left;
+    margin-right: 1rem;
+  }
+  .quote {
+    color:#00beef;
+    font-size: 2.4rem;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+  }
+  .quote::before{
+    content:'" ';
+  }
+  .quote::after{
+    content:' "';
+  }
+  .text-with-images{
+    display:grid;
+  }
+  .text-with-images {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .lists{
+    list-style-type:none;
+    margin-top: 2rem;
+  }
+  .lists li{
+    margin-bottom: 1.5rem;
+  }
+  .list-title,.list-subtitle{
+    color:#00beef;
+  }
+  .image-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(3, min-content);
+    gap: 2rem;
+    place-items: center;
+  }/*place items combines align items and justify content in grid or flex box*/
+  .image-1, .image-3{
+    grid-column:1/-1;
+  }/*this caused these images to take up the whole frame. couldn't you've done something different in image wrapper?*/
+  @media only screen and (max-width: 720px){
+    .image-wrapper{ 
+      grid-template-columns:1fr;
+    }
+  }/*collapses imgs to one fr one a smaller viewport*/
+  @media only screen and (max-width: 600px){
+    .text-with-images{
+      grid-template-columns:1fr;
+    }
+  }/*collapses the bottow text ares into a single column on smaller screens.*/
+  @media only screen and (max-width: 550px){
+    .hero-title{
+      font-size: 6rem;
+    }
+    .hero-subtitle,.author,.quote,.list-header{
+      font-size: 1.8rem;
+    }
+    .social-icons{
+      font-size:2rem;
+    }
+    .text{
+      font-size:1.6rem;
+    }
+  }
+  @media only screen and (max-width: 420px){
+    .hero-title{
+      font-size: 4.5rem;
+    }
+  }
